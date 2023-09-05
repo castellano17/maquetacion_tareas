@@ -130,10 +130,15 @@
 /* Para pantallas más pequeñas */
 @media (max-width: 768px) {
   .card-container {
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
   }
   .container-body {
     display: block;
+  }
+
+  .container-pendientes,
+  .container-filtro {
+    height: 180px;
   }
 }
 
