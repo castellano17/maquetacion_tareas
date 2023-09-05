@@ -140,6 +140,16 @@
   .container-filtro {
     height: 180px;
   }
+
+  .container-title {
+    flex-direction: column;
+    color: var(--blue-color);
+    align-items: first baseline;
+  }
+  .container-buttons {
+    display: block;
+    align-items: center;
+  }
 }
 
 .icon-text {
