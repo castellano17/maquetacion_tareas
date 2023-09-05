@@ -1,0 +1,219 @@
+/* Colores personalizados */
+:root {
+  --blue-color: #0e5799;
+  --red-color: #ca4050;
+  --green-color: #2dac52;
+  --yellow-color: #f8c313;
+  --yellow-color-secondary: #f0e499;
+  --gray-color: #c2d2e0;
+  --gray-color-secondary: #96a1ae;
+}
+
+.container-body {
+  display: flex;
+  justify-content: center;
+}
+
+.container-pendientes,
+.container-filtro {
+  padding: 8px;
+  max-width: auto;
+  height: 320px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  margin-bottom: 25px;
+}
+
+.container-pendientes h5 {
+  margin-left: 5px;
+  margin-top: 5px;
+}
+
+.col-form-label {
+  margin-left: 5px;
+  margin-top: 5px;
+  font-weight: 600;
+}
+
+.button-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 5px;
+  margin-top: 5px;
+}
+
+.button-filtro_span {
+  padding: 10px;
+  color: white;
+}
+
+.button-trabajo {
+  padding: 5px;
+  background-color: var(--gray-color-secondary);
+  border-radius: 5px;
+}
+.button-critico {
+  padding: 5px;
+  background-color: var(--red-color);
+  border-radius: 5px;
+}
+
+.button-documentacion {
+  padding: 5px;
+  background-color: var(--blue-color);
+  border-radius: 5px;
+}
+
+.button-reporte {
+  padding: 5px;
+  background-color: var(--green-color);
+  border-radius: 5px;
+}
+
+.button-capacitacion {
+  padding: 5px;
+  background-color: var(--yellow-color);
+  border-radius: 5px;
+}
+
+/* Estilos para el encabezado */
+.header-container {
+  background-color: var(--blue-color);
+  padding: 32px;
+  border-radius: 10px 10px 0 0;
+}
+.link {
+  text-decoration: underline;
+  color: var(--blue-color);
+}
+.navbar-width {
+  align-items: center;
+  max-width: 920px;
+}
+
+.container-task {
+  text-align: center;
+  margin: 15px;
+  padding: 20px;
+  width: 800px;
+}
+
+.container-title {
+  display: flex;
+  justify-content: space-between;
+  color: var(--blue-color);
+}
+
+.container-buttons {
+  display: flex;
+  justify-content: space-between;
+
+  margin-bottom: 14px;
+}
+
+/* Estilos para la sección de las cards */
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 5px;
+}
+.card {
+  height: auto;
+  max-width: 250px;
+  box-shadow: 0px 4px 8px 0px rgba(180, 177, 177, 0.2);
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #fefefe;
+  border-radius: 8px;
+}
+
+/* Para pantallas más pequeñas */
+@media (max-width: 768px) {
+  .card-container {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+}
+
+.icon-text {
+  display: flex;
+  align-items: center;
+}
+
+.title-icon {
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.title-text {
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  justify-content: center;
+  font-weight: 800;
+  margin-bottom: 5px;
+}
+
+.description-text {
+  font-size: 12px;
+  font-weight: 700;
+  text-align: left;
+  color: var(--blue-color);
+}
+
+.tipo-text {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.desarrollo {
+  display: flex;
+  justify-content: space-between;
+}
+
+.desarrollo-title {
+  color: var(--blue-color);
+}
+
+.desarrollo-porcentaje {
+  color: var(--green-color);
+  font-weight: 600;
+}
+
+.icon-date {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+}
+
+/* Estilos para Pendientes */
+
+.list {
+  list-style: none;
+  border-radius: 10px;
+
+  padding: 10px;
+  margin: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.list:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Cambiar la sombra en el hover */
+}
+a.enlace-eliminar {
+  margin-left: 10px;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.tachado {
+  color: var(--gray-color-secondary);
+}
+.unckeck {
+  color: var(--red-color);
+  font-weight: 500;
+}
