@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
     $typeTask = document.querySelector("#typeTask"),
     $inputDate = document.querySelector("#inputDate");
   const $proyectFilter = document.querySelector("#proyect-filter");
+  const $clientFilter = document.querySelector("#client-filter");
   const $spanAvance = document.getElementById("avance-semanal"); // Elemento para mostrar el avance
 
   // Agrega un evento de cambio al elemento #proyect
@@ -35,6 +36,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     refrescarListaDeTareas(tareasFiltradas);
   });
+
+  // Filtro para los clientes
+  // Agrega un evento de cambio al elemento #proyect
+  $clientFilter.addEventListener("change", function () {
+    const clienteSeleccionado = this.value; // obtengo el select
+
+    // Filtra las tareas basadas en el proyecto seleccionado
+    const tareasFiltradas = clienteSeleccionado
+      ? tareas.filter((tarea) => tarea.client === clienteSeleccionado)
+      : tareas; // Si el valor está vacío, muestra todas las tareas
+
+    refrescarListaDeTareas(tareasFiltradas);
+  });
+
   // Escuchar clic del botón para agregar nueva tarea
   $btnGuardarTarea.onclick = function () {
     const tarea = $inputNuevaTarea.value;
@@ -101,10 +116,14 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // Definir función que refresca la lista de tareas a partir del arreglo global
-  const refrescarListaDeTareas = (tareasMostrar = tareas) => {
+  const refrescarListaDeTareas = (tareasMostrarAhora) => {
     $contenedorTareas.innerHTML = "";
 
-    for (const [indice, tarea] of tareas.entries()) {
+    const isFiltered = tareasMostrarAhora || tareas; // Si no tengo un filtro muestro todas las tareas
+
+    isFiltered.forEach((renderTarea, indice) => {
+      // Paso las tareas al forEch para que las renderice
+
       // div con la clase "card"
       const $cardDiv = document.createElement("div");
       $cardDiv.classList.add("card");
@@ -120,7 +139,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const $titleTextSpan = document.createElement("span");
       $titleTextSpan.classList.add("title-text");
-      if (tarea.terminada) {
+      if (renderTarea.terminada) {
         $titleTextSpan.textContent = "Terminada";
         $titleTextSpan.style.color = "var(--green-color)";
       } else {
@@ -130,7 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const $description = document.createElement("p");
       $description.classList.add("description-text");
-      $description.textContent = tarea.tarea;
+      $description.textContent = renderTarea.tarea;
 
       //cliente
       const $clientDiv = document.createElement("div");
@@ -143,7 +162,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const $clientText = document.createElement("p");
       $clientText.classList.add("tipo-text");
-      $clientText.textContent = tarea.client;
+      $clientText.textContent = renderTarea.client;
 
       //proyecto
       const $proyectDiv = document.createElement("div");
@@ -156,7 +175,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const $proyectText = document.createElement("p");
       $proyectText.classList.add("tipo-text");
-      $proyectText.textContent = tarea.proyect;
+      $proyectText.textContent = renderTarea.proyect;
 
       //avance
       const $estadoDiv = document.createElement("div");
@@ -181,7 +200,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const $dateText = document.createElement("span");
       //  $dateText.classList.add("tipo-text");
-      $dateText.textContent = tarea.date;
+      $dateText.textContent = renderTarea.date;
 
       //date restante
 
@@ -196,12 +215,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const $dateFinText = document.createElement("span");
       //  $dateText.classList.add("tipo-text");
-      $dateFinText.textContent = tarea.dateFin;
+      $dateFinText.textContent = renderTarea.dateFin;
 
       // El input para marcar la tarea como terminada
       const $checkbox = document.createElement("input");
       $checkbox.type = "checkbox";
-      $checkbox.checked = tarea.terminada; // Establecer el estado del checkbox
+      $checkbox.checked = renderTarea.terminada; // Establecer el estado del checkbox
       $checkbox.onchange = function () {
         const isChecked = this.checked;
         tareas[indice].terminada = this.checked; // Actualizar el estado en el arreglo
@@ -236,12 +255,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const $li = document.createElement("li");
       $li.classList.add("list");
-      if (tarea.terminada) {
+      if (renderTarea.terminada) {
         $li.classList.add("tachado");
       }
 
       $li.appendChild($checkbox);
-      $li.appendChild(document.createTextNode(tarea.tarea));
+      $li.appendChild(document.createTextNode(renderTarea.tarea));
       $pendientes.appendChild($li);
 
       $iconTextDiv.appendChild($icon);
@@ -271,7 +290,7 @@ document.addEventListener("DOMContentLoaded", () => {
       $cardDiv.appendChild($dateFinDiv);
 
       $contenedorTareas.appendChild($cardDiv);
-    }
+    });
   };
 
   // Llamar a la función la primera vez

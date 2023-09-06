@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html lang="es">
+  ​
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Interfaz de Tareas</title>
-
+    ​
     <!-- Bootstrap CSS -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
-
+    ​
     <script
       src="https://kit.fontawesome.com/6442198168.js"
       crossorigin="anonymous"
     ></script>
-
+    ​
     <link rel="stylesheet" href="styles.css" />
   </head>
+  ​
   <body>
     <!-- Modal agregar task -->
     <div
@@ -116,9 +118,9 @@
         </div>
       </div>
     </div>
-
+    ​
     <!-- fin modal -->
-
+    ​
     <div class="container mt-5">
       <div class="row gap-4">
         <div class="header-container"></div>
@@ -158,7 +160,7 @@
             </div>
           </nav>
         </div>
-
+        ​
         <div class="container-body">
           <div>
             <div class="container-pendientes">
@@ -185,16 +187,16 @@
                 <label for="client-filter" class="col-form-label"
                   >Cliente:</label
                 >
-                <select class="form-select" id="proyect-filter">
-                  <option value="">Seleccionar</option>
+                <select class="form-select" id="client-filter">
+                  <option value="">Todos los clientes</option>
                   <option value="Centro Asturiano de México A.C">
                     Centro Asturiano de México A.C
                   </option>
                   <option value="Centro Asturiano de México A.C 2">
-                    Migración de SICAM 2
+                    Centro Asturiano de México A.C 2
                   </option>
                   <option value="Centro Asturiano de México A.C 3">
-                    Migración de SICAM 3
+                    Centro Asturiano de México A.C 3
                   </option>
                 </select>
               </div>
@@ -203,7 +205,7 @@
                   Trabajo en Equipo
                 </p>
                 <p class="button-filtro_span button-critico">Crítico</p>
-
+                ​
                 <p class="button-filtro_span button-documentacion">
                   Documentación
                 </p>
@@ -241,17 +243,18 @@
                 Agregar tarea</a
               >
             </div>
-
+            ​
             <div id="contenedorTareas" class="card-container"></div>
           </div>
         </div>
       </div>
     </div>
-
+    ​
     <!-- Bootstrap JS y Popper.js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
+    ​
     <!-- Tu archivo JavaScript personalizado -->
     <script src="script.js"></script>
   </body>
+  ​
 </html>

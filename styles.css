@@ -45,6 +45,7 @@
 .button-filtro_span {
   padding: 10px;
   color: white;
+  cursor: pointer;
 }
 
 .button-trabajo {
@@ -107,7 +108,6 @@
 .container-buttons {
   display: flex;
   justify-content: space-between;
-
   margin-bottom: 14px;
 }
 
@@ -149,6 +149,10 @@
   .container-buttons {
     display: block;
     align-items: center;
+  }
+
+  .container-task {
+    text-align: left;
   }
 }
 
