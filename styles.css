@@ -27,12 +27,20 @@
 .container-pendientes h5 {
   margin-left: 5px;
   margin-top: 5px;
+  color: var(--blue-color);
 }
 
 .col-form-label {
   margin-left: 5px;
   margin-top: 5px;
   font-weight: 600;
+}
+
+.variables-filtro {
+  background-color: white;
+  color: black;
+  padding: 0 5px 0 5px;
+  border-radius: 3px;
 }
 
 .button-container {
@@ -45,7 +53,6 @@
 .button-filtro_span {
   padding: 10px;
   color: white;
-  cursor: pointer;
 }
 
 .button-trabajo {
@@ -89,7 +96,6 @@
 }
 .navbar-width {
   align-items: center;
-  max-width: 920px;
 }
 
 .container-task {
@@ -194,6 +200,7 @@
 .desarrollo {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 5px;
 }
 
 .desarrollo-title {
@@ -209,6 +216,8 @@
   display: flex;
   justify-content: space-between;
   font-size: 12px;
+  margin-bottom: 10px;
+  margin-top: 5px;
 }
 
 /* Estilos para Pendientes */
@@ -238,4 +247,8 @@ a.enlace-eliminar {
 .unckeck {
   color: var(--red-color);
   font-weight: 500;
+}
+
+.fa-circle {
+  font-size: 9px;
 }

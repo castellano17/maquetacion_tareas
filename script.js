@@ -24,6 +24,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const $proyectFilter = document.querySelector("#proyect-filter");
   const $clientFilter = document.querySelector("#client-filter");
   const $spanAvance = document.getElementById("avance-semanal"); // Elemento para mostrar el avance
+  const $enEquipoCheckbox = document.getElementById("enEquipoCheckbox");
+  const $criticoCheckbox = document.getElementById("criticoCheckbox");
+  const $documentacionCheckbox = document.getElementById(
+    "documentacionCheckbox"
+  );
+  const $reporteCheckbox = document.getElementById("reporteCheckbox");
+  const $capacitacionCheckbox = document.getElementById("capacitacionCheckbox");
+  const $trabajoEnEquipo = document.getElementById("trabajoEnEquipo");
+  const $critico = document.getElementById("critico");
+  const $documentacion = document.getElementById("documentacion");
+  const $capacitacion = document.getElementById("capacitacion");
+  const $reporte = document.getElementById("reporte");
 
   // Agrega un evento de cambio al elemento #proyect
   $proyectFilter.addEventListener("change", function () {
@@ -57,6 +69,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const proyect = $proyect.value;
     const client = $client.value;
     const dateFin = $inputDate.value;
+    const enEquipoCheckbox = $enEquipoCheckbox.checked;
+    const criticoCheckbox = $criticoCheckbox.checked;
+    const documentacionCheckbox = $documentacionCheckbox.checked;
+    const reporteCheckbox = $reporteCheckbox.checked;
+    const capacitacionCheckbox = $capacitacionCheckbox.checked;
+
     if (!tarea || !dateFin || !typeTask || !proyect || !client) {
       alert("Todos los campos son obligatorios.");
       return;
@@ -78,7 +96,12 @@ document.addEventListener("DOMContentLoaded", () => {
       typeTask,
       terminada: false,
       dateFin,
-      date: fechaFormateada, // Agregar la fecha formateada
+      enEquipo: enEquipoCheckbox,
+      critico: criticoCheckbox,
+      documentacion: documentacionCheckbox,
+      reporte: reporteCheckbox,
+      capacitacion: capacitacionCheckbox,
+      date: fechaFormateada,
     });
 
     $inputNuevaTarea.value = "";
@@ -86,6 +109,11 @@ document.addEventListener("DOMContentLoaded", () => {
     $proyect.value = "";
     $client.value = "";
     $typeTask.value = "";
+    $enEquipoCheckbox.checked = false;
+    $criticoCheckbox.checked = false;
+    $documentacionCheckbox.checked = false;
+    $reporteCheckbox.checked = false;
+    $capacitacionCheckbox.checked = false;
     guardarTareasEnAlmacenamiento();
     refrescarListaDeTareas();
   };
@@ -115,8 +143,37 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem(CLAVE_LOCALSTORAGE, JSON.stringify(tareas));
   };
 
+  //Función para filtrar y contar las propiedad de los checkbox
+  function contarTareasPorPropiedad(tareas, propiedad) {
+    return tareas.filter((tarea) => tarea[propiedad] === true).length;
+  }
+
   // Definir función que refresca la lista de tareas a partir del arreglo global
   const refrescarListaDeTareas = (tareasMostrarAhora) => {
+    // envíar dato a la función para contar las tareas con diferentes propiedades
+    const cantidadTareasEnEquipo = contarTareasPorPropiedad(tareas, "enEquipo");
+    const cantidadTareasCriticas = contarTareasPorPropiedad(tareas, "critico");
+    const cantidadTareasDocumentacion = contarTareasPorPropiedad(
+      tareas,
+      "documentacion"
+    );
+    const cantidadTareasReporte = contarTareasPorPropiedad(tareas, "reporte");
+    const cantidadTareasCapacitacion = contarTareasPorPropiedad(
+      tareas,
+      "capacitacion"
+    );
+
+    $trabajoEnEquipo.textContent = cantidadTareasEnEquipo;
+    $critico.textContent = cantidadTareasCriticas;
+    $documentacion.textContent = cantidadTareasDocumentacion;
+    $reporte.textContent = cantidadTareasReporte;
+    $capacitacion.textContent = cantidadTareasCapacitacion;
+
+    // Antes de agregar nuevos checkboxes, eliminar los antiguos
+    while ($pendientes.firstChild) {
+      $pendientes.removeChild($pendientes.firstChild);
+    }
+
     $contenedorTareas.innerHTML = "";
 
     const isFiltered = tareasMostrarAhora || tareas; // Si no tengo un filtro muestro todas las tareas
@@ -135,16 +192,17 @@ document.addEventListener("DOMContentLoaded", () => {
       //  ícono clock
       const $icon = document.createElement("i");
       $icon.classList.add("fa-solid", "fa-clock");
-      $icon.style.color = "var(--blue-color)";
 
       const $titleTextSpan = document.createElement("span");
       $titleTextSpan.classList.add("title-text");
       if (renderTarea.terminada) {
         $titleTextSpan.textContent = "Terminada";
         $titleTextSpan.style.color = "var(--green-color)";
+        $icon.style.color = "var(--blue-color)";
       } else {
         $titleTextSpan.textContent = "En Proceso";
         $titleTextSpan.style.color = "var(--blue-color)";
+        $icon.style.color = "var(--red-color)";
       }
 
       const $description = document.createElement("p");
@@ -208,14 +266,51 @@ document.addEventListener("DOMContentLoaded", () => {
       $dateFinDiv.classList.add("icon-date");
 
       //  ícono date fin
+
+      // Calcula los días restantes
+      const fechaActual = new Date();
+      const fechaFin = new Date(renderTarea.dateFin);
+      const diferenciaMs = fechaFin - fechaActual;
+      const diasRestantes = Math.ceil(diferenciaMs / (1000 * 60 * 60 * 24)); // Milisegundos a días
+
       const $iconFind = document.createElement("span");
       $iconFind.classList.add("fa-solid", "fa-clock");
-      $iconFind.style.color = "var(--blue-color)";
-      $iconFind.textContent = 300;
+      $iconFind.style.color =
+        diasRestantes <= 0 ? "var(--red-color)" : "var(--blue-color)";
+      $iconFind.textContent = diasRestantes;
 
       const $dateFinText = document.createElement("span");
       //  $dateText.classList.add("tipo-text");
       $dateFinText.textContent = renderTarea.dateFin;
+
+      //colores de variables
+      const $variablesColores = document.createElement("div");
+      $variablesColores.style.display = "flex";
+      $variablesColores.style.justifyContent = "flex-end";
+
+      // Objeto que contiene las propiedades y los colores correspondientes
+      const propiedadesColores = {
+        enEquipo: "var(--gray-color)",
+        critico: "var(--red-color)",
+        documentacion: "var(--blue-color)",
+        capacitacion: "var(--yellow-color)",
+        reporte: "var(--green-color)",
+      };
+
+      // Itera a través de las propiedades y agrega círculos para las propiedades verdaderas
+      for (const propiedad in propiedadesColores) {
+        if (renderTarea[propiedad] === true) {
+          const $circulo = document.createElement("i");
+          $circulo.classList.add("fa-solid", "fa-circle");
+          $circulo.style.color = propiedadesColores[propiedad];
+          $circulo.style.marginLeft = "10px";
+          $variablesColores.appendChild($circulo);
+        }
+      }
+
+      // Luego, agrega $variablesColores al elemento que desees en tu página.
+
+      // Luego, agrega $variablesColores al elemento que desees en tu página.
 
       // El input para marcar la tarea como terminada
       const $checkbox = document.createElement("input");
@@ -243,11 +338,13 @@ document.addEventListener("DOMContentLoaded", () => {
         if (isChecked) {
           $titleTextSpan.textContent = "Terminada";
           $titleTextSpan.style.color = "var(--green-color)";
+          $icon.style.color = "var(--blue-color)";
           $li.classList.add("tachado");
           $li.classList.remove("unckeck");
         } else {
           $titleTextSpan.textContent = "En Proceso";
           $titleTextSpan.style.color = "var(--blue-color)";
+          $icon.style.color = "var(--red-color)";
           $li.classList.remove("tachado");
           $li.classList.add("unckeck");
         }
@@ -288,6 +385,7 @@ document.addEventListener("DOMContentLoaded", () => {
       $dateFinDiv.appendChild($iconFind);
       $dateFinDiv.appendChild($dateFinText);
       $cardDiv.appendChild($dateFinDiv);
+      $cardDiv.appendChild($variablesColores);
 
       $contenedorTareas.appendChild($cardDiv);
     });

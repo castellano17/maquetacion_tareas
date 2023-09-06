@@ -96,6 +96,65 @@
                 <label for="message-text" class="col-form-label">Tarea:</label>
                 <textarea class="form-control" id="inputNewTask"></textarea>
               </div>
+
+              <div class="mb-3">
+                <label class="col-form-label">Tipo de tarea:</label><br />
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="enEquipoCheckbox"
+                    value="En equipo"
+                  />
+                  <label class="form-check-label" for="enEquipoCheckbox"
+                    >En equipo</label
+                  >
+                </div>
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="criticoCheckbox"
+                    value="Crítico"
+                  />
+                  <label class="form-check-label" for="criticoCheckbox"
+                    >Crítico</label
+                  >
+                </div>
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="documentacionCheckbox"
+                    value="Documentación"
+                  />
+                  <label class="form-check-label" for="documentacionCheckbox"
+                    >Documentación</label
+                  >
+                </div>
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="reporteCheckbox"
+                    value="Reporte"
+                  />
+                  <label class="form-check-label" for="reporteCheckbox"
+                    >Reporte</label
+                  >
+                </div>
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="capacitacionCheckbox"
+                    value="Capacitación"
+                  />
+                  <label class="form-check-label" for="capacitacionCheckbox"
+                    >Capacitación</label
+                  >
+                </div>
+              </div>
             </form>
           </div>
           <div class="modal-footer">
@@ -118,9 +177,9 @@
         </div>
       </div>
     </div>
-    ​
+
     <!-- fin modal -->
-    ​
+
     <div class="container mt-5">
       <div class="row gap-4">
         <div class="header-container"></div>
@@ -128,7 +187,7 @@
           <nav
             class="navbar navbar-expand-lg navbar-light bg-light shadow p-3 mb-5 bg-body rounded"
           >
-            <div class="container">
+            <div class="container mx-auto">
               <a class="navbar-brand link" href="#">
                 <i
                   class="fa-solid fa-house-chimney"
@@ -160,7 +219,7 @@
             </div>
           </nav>
         </div>
-        ​
+
         <div class="container-body">
           <div>
             <div class="container-pendientes">
@@ -203,15 +262,23 @@
               <div class="button-container">
                 <p class="button-filtro_span button-trabajo">
                   Trabajo en Equipo
+                  <span id="trabajoEnEquipo" class="variables-filtro"> </span>
                 </p>
-                <p class="button-filtro_span button-critico">Crítico</p>
+                <p class="button-filtro_span button-critico">
+                  Crítico
+                  <span id="critico" class="variables-filtro"> </span>
+                </p>
                 ​
                 <p class="button-filtro_span button-documentacion">
                   Documentación
+                  <span id="documentacion" class="variables-filtro"> </span>
                 </p>
-                <p class="button-filtro_span button-reporte">Reporte</p>
+                <p class="button-filtro_span button-reporte">
+                  Reporte <span id="reporte" class="variables-filtro"> </span>
+                </p>
                 <p class="button-filtro_span button-capacitacion">
                   Capacitación
+                  <span id="capacitacion" class="variables-filtro"> </span>
                 </p>
               </div>
             </div>
